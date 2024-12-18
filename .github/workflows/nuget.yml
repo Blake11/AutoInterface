@@ -32,7 +32,7 @@ jobs:
       run: dotnet test -c Release --no-build --verbosity normal
       
     - name: Pack the project
-      run: dotnet pack --c Release --no-build --output ./nupkg ./src/AutoInterface.Generator/AutoInterface.Generator.csproj
+      run: dotnet pack -c Release --no-build --output ./nupkg ./src/AutoInterface.Generator/AutoInterface.Generator.csproj
     
     
     - name: Publish to NuGet
