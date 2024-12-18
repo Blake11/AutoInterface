@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <RootNamespace>AutoInterface.Generator</RootNamespace>
+
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+
+
+        <PackageId>AutoInterface</PackageId>
+        <PackageTags>source-generator;roslyn</PackageTags>
+        <Version>1.0.0</Version>
+
+        <Description>A source generator to create interfaces based on public methods of a class</Description>
+        <Authors>https://github.com/Blake11/AutoInterface/graphs/contributors</Authors>
+
+        <RepositoryUrl>https://github.com/Blake11/AutoInterface</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/Blake11/AutoInterface</PackageProjectUrl>
+
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.12.0"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.12.0"/>
+    </ItemGroup>
+    
+</Project>
