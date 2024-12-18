@@ -32,8 +32,9 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       
     - name: Pack the project
-      run: dotnet pack --configuration Release --no-build --output ./nupkg
-      
+      run: dotnet pack --configuration Release --no-build --output ./nupkg ./src/AutoInterface.Generator/AutoInterface.Generator.csproj
+    
+    
     - name: Publish to NuGet
-      run: nuget push ./nupkg/*.nupkg -Source nuget.org -ApiKey ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push  ./nupkg/*.nupkg -Source nuget.org -ApiKey ${{ secrets.NUGET_API_KEY }}
     
