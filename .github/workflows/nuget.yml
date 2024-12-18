@@ -36,7 +36,7 @@ jobs:
     
     
     - name: Publish to NuGet
-      run: dotnet nuget push  ./nupkg/*.nupkg -Source nuget.org -ApiKey ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push  ./nupkg/*.nupkg -s nuget.org -sk ${{ secrets.NUGET_API_KEY }}
       
     - name: Upload NuGet package as artifact
       uses: actions/upload-artifact@v3
