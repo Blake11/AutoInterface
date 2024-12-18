@@ -33,10 +33,6 @@ jobs:
       
     - name: Pack the project
       run: dotnet pack -c Release --no-build --output ./nupkg ./src/AutoInterface.Generator/AutoInterface.Generator.csproj
-    
-    
-    - name: Publish to NuGet
-      run: dotnet nuget push  ./nupkg/*.nupkg -s nuget.org --api-key ${{ secrets.NUGET_API_KEY }}
       
     - name: Upload NuGet package as artifact
       uses: actions/upload-artifact@v3
