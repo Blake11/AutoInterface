@@ -1,3 +1,7 @@
+[![.NET](https://github.com/Blake11/AutoInterface/actions/workflows/nuget.yml/badge.svg)](https://github.com/Blake11/AutoInterface/actions/workflows/nuget.yml)
+[![NuGet](https://img.shields.io/nuget/dt/Blake11.AutoInterface.svg)](https://www.nuget.org/packages/Blake11.AutoInterface)
+[![NuGet](https://img.shields.io/nuget/vpre/Blake11.AutoInterface.svg)](https://www.nuget.org/packages/Blake11.AutoInterface)
+
 # AutoInterface
 Yet another source generator that creates interfaces for implementations and auto-implements the said interface.
 
