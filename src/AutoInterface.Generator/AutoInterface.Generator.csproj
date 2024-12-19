@@ -12,7 +12,7 @@
         <IncludeBuildOutput>false</IncludeBuildOutput>
 
 
-        <PackageId>AutoInterface</PackageId>
+        <PackageId>Blake11.AutoInterface</PackageId>
         <PackageTags>source-generator;roslyn</PackageTags>
         <Version>1.0.0</Version>
 

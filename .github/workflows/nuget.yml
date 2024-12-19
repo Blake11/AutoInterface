@@ -6,8 +6,6 @@ name: .NET
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -30,17 +28,30 @@ jobs:
       
     - name: Test
       run: dotnet test -c Release --no-build --verbosity normal
+
+    - name: Generate version based on date and commit hash
+      id: version
+      run: |
+        base_version="1.0"
+        commit_count=$(git rev-list --count HEAD)
+        new_version="${base_version}.${commit_count}"        
+        echo "VERSION=$new_version" >> $GITHUB_ENV
       
     - name: Pack the project
-      run: dotnet pack -c Release --no-build --output ./nupkg ./src/AutoInterface.Generator/AutoInterface.Generator.csproj
+      run: dotnet pack -c Release -p:PackageVersion=$VERSION --no-build --output ./nupkg ./src/AutoInterface.Generator/AutoInterface.Generator.csproj
     
     
     - name: Publish to NuGet
       run: dotnet nuget push  ./nupkg/*.nupkg -s nuget.org --api-key ${{ secrets.NUGET_API_KEY }}
       
-    - name: Upload NuGet package as artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: AutoInterface.Generator
-        path: ./nupkg/*.nupkg
+    - name: Create GitHub Release
+      id: create_release
+      run: |
+        # Create a GitHub release using the new version
+        echo "Creating GitHub release for version $VERSION"
+        gh release create "$VERSION" \
+          "**/*.nupkg" \
+          --title "Release $VERSION" \
+          --notes "Release version $VERSION" \
+          --repo $GITHUB_REPOSITORY
     
