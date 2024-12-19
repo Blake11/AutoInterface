@@ -13,6 +13,12 @@ public static class Constants
     public const string SystemAttributeTargetsClass
         = $"{GlobalNameSpace}System.AttributeTargets.Class";
 
+    public const string SystemAttributeTargetsMethod
+        = $"{GlobalNameSpace}System.AttributeTargets.Method";
+
     public const string SystemAttributeUsageClass =
         $"{SystemAttributeUsage}({SystemAttributeTargetsClass})";
+
+    public const string SystemAttributeUsageMethod =
+        $"{SystemAttributeUsage}({SystemAttributeTargetsMethod})";
 }

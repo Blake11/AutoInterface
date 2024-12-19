@@ -19,11 +19,15 @@ public class AutoInterfaceMethodsGenerator : IIncrementalGenerator
                 GenerateAutoInterfaceAttributeTemplate.FileName,
                 GenerateAutoInterfaceAttributeTemplate.Code.ToFormattedCode()
             );
+            x.AddSource(
+                GenerateAutoInterfaceIgnoreAttributeTemplate.FileName,
+                GenerateAutoInterfaceIgnoreAttributeTemplate.Code.ToFormattedCode()
+            );
         });
 
         var classesToParse = context.SyntaxProvider
             .ForAttributeWithMetadataName(
-                GenerateAutoInterfaceAttributeTemplate.FullName,
+                $"{GenerateAutoInterfaceAttributeTemplate.ClassName}",
                 predicate: Predicate,
                 transform: Transform)
             .Where(IsMatch);

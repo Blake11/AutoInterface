@@ -55,8 +55,7 @@ For matching types there will be generated 2 components:
 
 # Not supported yet:
 - docs
-- explicit interface name, namespace 
-- explicit ignore some methods
+- explicit interface name, namespace
 - nullable parameters
 - probably a bunch more
 

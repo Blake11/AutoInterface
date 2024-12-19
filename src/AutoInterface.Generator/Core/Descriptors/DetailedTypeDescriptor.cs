@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using AutoInterface.Generator.Templates;
 using Microsoft.CodeAnalysis;
 
 namespace AutoInterface.Generator.Core.Descriptors;
@@ -29,6 +30,8 @@ public readonly struct DetailedTypeDescriptor : IEquatable<DetailedTypeDescripto
 
         var methodDescriptors = classSymbol.GetMembers()
             .OfType<IMethodSymbol>()
+            .Where(static x => !x.GetAttributes()
+                .Any(attr => attr.AttributeClass?.Name == GenerateAutoInterfaceIgnoreAttributeTemplate.ClassName))
             .Where(static x => x.DeclaredAccessibility == Accessibility.Public)
             .Where(static x => x.MethodKind == MethodKind.Ordinary)
             .Where(static x => !x.IsStatic)
