@@ -38,8 +38,10 @@ public static class TestsFixture
 
         actual = actual[actual.IndexOf("public interface", StringComparison.Ordinal)..];
 
-
-        // actual[475..^0].ToList().Zip(expectedOutput.ReplaceLineEndings()).Select(x => (x.First, x.Second, x.First == x.Second))
-        actual.Should().Contain(expectedOutput.ReplaceLineEndings());
+        var debugChars = actual.ToList().Zip(expectedOutput.ReplaceLineEndings())
+            .Select(x => (x.First, x.Second, x.First == x.Second));
+        
+        // debugChars.Should().AllSatisfy(x => x.First.Should().Be(x.Second));
+        actual.Should().BeEquivalentTo(expectedOutput.ReplaceLineEndings());
     }
 }

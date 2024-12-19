@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System.Text;
+using AutoInterface.Generator.Core;
 using AutoInterface.Generator.Core.Descriptors;
 
 namespace AutoInterface.Generator.Templates;
@@ -8,7 +8,7 @@ public static class GenericArgumentTemplate
 {
     public static void Render(
         in StringBuilder sb,
-        in IReadOnlyCollection<GenericArgumentDescriptor> genericArguments)
+        in EquatableArray<GenericArgumentDescriptor> genericArguments)
     {
         if (genericArguments.Count <= 0) return;
 

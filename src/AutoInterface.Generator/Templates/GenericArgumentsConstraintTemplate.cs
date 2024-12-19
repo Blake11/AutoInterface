@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoInterface.Generator.Core;
@@ -10,7 +9,7 @@ public static class GenericArgumentsConstraintTemplate
 {
     public static void Render(
         in StringBuilder sb,
-        in IReadOnlyCollection<GenericArgumentDescriptor> genericArguments)
+        in EquatableArray<GenericArgumentDescriptor> genericArguments)
     {
         foreach (var genericArgument in genericArguments
                      .Where(x => HasManagedGenericConstraint(x) || x.TypedDescriptors.Count > 0))

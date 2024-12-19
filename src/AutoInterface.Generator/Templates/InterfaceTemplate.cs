@@ -5,7 +5,7 @@ using AutoInterface.Generator.Core.Descriptors;
 
 namespace AutoInterface.Generator.Templates;
 
-public class InterfaceTemplate
+public static class InterfaceTemplate
 {
     public static void Render(in StringBuilder sb, in DetailedTypeDescriptor type)
     {
@@ -26,9 +26,10 @@ public class InterfaceTemplate
             GenericArgumentTemplate.Render(sb, method.GenericArguments);
             sb.Append("(");
 
-            RenderParameters(sb, method.Arguments, detailedTypeDescriptor.GenericArguments);
+            RenderParameters(sb, method.Arguments, method.GenericArguments, detailedTypeDescriptor.GenericArguments);
 
             sb.Append(")");
+            GenericArgumentsConstraintTemplate.Render(sb, method.GenericArguments);
             sb.Append(";");
         }
     }
@@ -36,13 +37,16 @@ public class InterfaceTemplate
     private static void RenderParameters(
         in StringBuilder sb,
         in EquatableArray<ParameterDescriptor> parameters,
+        in EquatableArray<GenericArgumentDescriptor> genericArguments,
         in EquatableArray<GenericArgumentDescriptor> typeGenericArguments)
     {
-        if (parameters is not { Count: > 0 }) return;
+        if (parameters is not { Count: > 0 })
+            return;
 
         foreach (var parameter in parameters)
         {
-            var isGenericParameter = typeGenericArguments.Any(x => x.Name == parameter.TypeDescriptor.Name);
+            var isGenericParameter = genericArguments.Any(x => x.Name == parameter.TypeDescriptor.Name) ||
+                                     typeGenericArguments.Any(x => x.Name == parameter.TypeDescriptor.Name);
 
             ParameterDescriptorTemplate.Render(sb, parameter, isGenericParameter);
             sb.Append(",");
