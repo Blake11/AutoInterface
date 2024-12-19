@@ -54,10 +54,10 @@ For matching types there will be generated 2 components:
 
 
 # Not supported yet:
-- default parameters
 - docs
 - explicit interface name, namespace 
 - explicit ignore some methods
+- nullable parameters
 - probably a bunch more
 
 # FAQ:

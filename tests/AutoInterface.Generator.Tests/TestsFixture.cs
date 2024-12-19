@@ -26,9 +26,12 @@ public static class TestsFixture
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
 
-        var generatedFileSyntax = runResult.GeneratedTrees.Single(t =>
+        var generatedFileSyntax = runResult.GeneratedTrees.SingleOrDefault(t =>
             !t.FilePath.Contains("AutoInterfaceAttribute.g.cs")
         );
+
+        if (generatedFileSyntax == null)
+            throw new Exception($"Failed to generate auto interface file");
 
 
         var actual = generatedFileSyntax.GetText().ToString().ReplaceLineEndings();

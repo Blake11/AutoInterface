@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using AutoInterface.Generator.Core.Descriptors;
 using Microsoft.CodeAnalysis;
@@ -20,6 +21,22 @@ public static class ParameterDescriptorTemplate
 
         sb.Append(' ');
         sb.AppendLine(descriptor.Name);
+        
+        if (descriptor.Default.IsSet)
+        {
+            var defaultValue = descriptor.Default.Value switch
+            {
+                null => "null",
+                string s => $"\"{s.Replace("\\", @"\\").Replace("\"", "\\\"")}\"",
+                float f => $"{f.ToString(CultureInfo.InvariantCulture)}f",
+                double d => d.ToString(CultureInfo.InvariantCulture),
+                bool b => b ? "true" : "false",
+                _ => descriptor.Default.Value.ToString()
+            };
+            
+            sb.Append($" = {defaultValue}");
+        }
+
     }
 
     private static string ToParameterPrefix(RefKind kind) =>
